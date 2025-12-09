@@ -1,17 +1,82 @@
 /*单行溢出*/
 .one-txt-cut {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    word-break: break-all;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
 }
 /*多行溢出 手机端使用*/
 .txt-cut {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    word-break: break-all;
-    -webkit-line-clamp: 2;
-    /*! autoprefixer: ignore next */
-    -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-line-clamp: 2;
+  /*! autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.w-100v {
+  width: 100vw;
+}
+.h-100v {
+  height: 100vh;
+}
+
+$padding-margin-sizes: 2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 30, 32;
+$direction: (
+  t: top,
+  r: right,
+  b: bottom,
+  l: left,
+);
+@each $value in $padding-margin-sizes {
+  .m {
+    &-#{$value} {
+      margin: 1px * $value;
+    }
+    &x-#{$value} {
+      margin-left: 1px * $value;
+      margin-right: 1px * $value;
+    }
+    &y-#{$value} {
+      margin-top: 1px * $value;
+      margin-bottom: 1px * $value;
+    }
+    @each $k, $v in $direction {
+      &#{$k}-#{$value} {
+        margin-#{$v}: 1px * $value;
+      }
+    }
+  }
+  .p {
+    &-#{$value} {
+      padding: 1px * $value;
+    }
+    &x-#{$value} {
+      padding-left: 1px * $value;
+      padding-right: 1px * $value;
+    }
+    &y-#{$value} {
+      padding-top: 1px * $value;
+      padding-bottom: 1px * $value;
+    }
+    @each $k, $v in $direction {
+      &#{$k}-#{$value} {
+        padding-#{$v}: 1px * $value;
+      }
+    }
+  }
 }

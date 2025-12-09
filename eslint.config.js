@@ -1,3 +1,11 @@
+/*
+ * @Author: WangYunHong 18788604629@163.com
+ * @Date: 2025-12-03 14:12:20
+ * @LastEditors: WangYunHong 18788604629@163.com
+ * @LastEditTime: 2025-12-03 14:46:12
+ * @FilePath: /tally_book_h5/eslint.config.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import js from '@eslint/js';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -28,7 +36,7 @@ export default tseslint.config(
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 13,
       globals: globals.browser,
       parserOptions: {
         ecmaFeatures: {
@@ -78,6 +86,15 @@ export default tseslint.config(
         {
           argsIgnorePattern: '^_',
           varsIgnorePattern: '^_',
+        },
+      ],
+      'no-unused-expressions': 'off',
+      '@typescript-eslint/no-unused-expressions': [
+        'error',
+        {
+          allowShortCircuit: true,
+          allowTernary: true,
+          allowTaggedTemplates: true,
         },
       ],
       'react-refresh/only-export-components': [
