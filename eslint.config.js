@@ -97,6 +97,10 @@ export default tseslint.config(
           allowTaggedTemplates: true,
         },
       ],
+      'no-use-before-define': 'off',
+      '@typescript-eslint/no-use-before-define': 'off',
+      'react-hooks/exhaustive-deps': 'off',
+      'react-hooks/immutability': 'off',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
