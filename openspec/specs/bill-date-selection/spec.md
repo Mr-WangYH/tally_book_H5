@@ -1,0 +1,29 @@
+# bill-date-selection Specification
+
+## Purpose
+TBD - created by archiving change add-date-picker-popup. Update Purpose after archive.
+## Requirements
+### Requirement: 账单日期选择交互
+账单列表页面 SHALL 提供日期选择交互功能，允许用户通过点击日期显示区域来打开日期选择器，选择不同的月份查看对应月份的账单记录。
+
+#### Scenario: 用户点击日期区域打开日期选择器
+- **WHEN** 用户点击账单列表页面头部的日期显示区域（显示当前选中月份，格式为 `YYYY-MM`）
+- **THEN** 系统 SHALL 显示日期选择弹窗，弹窗中包含月份选择器（DatePicker，精度为月份）
+
+#### Scenario: 用户选择月份后更新账单列表
+- **WHEN** 用户在日期选择器中选择一个月份并确认
+- **THEN** 系统 SHALL：
+  - 将选中的月份更新为查询参数（格式：`YYYY-MM`）
+  - 自动关闭日期选择弹窗
+  - 重置分页参数为第 1 页
+  - 使用新的日期参数重新请求账单列表数据
+  - 更新页面头部显示的日期为选中的月份
+
+#### Scenario: 用户取消日期选择
+- **WHEN** 用户点击日期选择弹窗的遮罩层或关闭按钮
+- **THEN** 系统 SHALL 关闭日期选择弹窗，不更新查询参数和账单列表
+
+#### Scenario: 日期格式一致性
+- **WHEN** 日期选择器返回日期对象
+- **THEN** 系统 SHALL 使用 `dayjs` 将日期对象转换为 `YYYY-MM` 格式，确保与现有业务逻辑和 API 接口格式一致
+

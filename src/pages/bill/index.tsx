@@ -13,6 +13,14 @@ import { InfiniteScroll, PullToRefresh } from 'antd-mobile';
 import dayjs from 'dayjs';
 import { getBillListApi, type GetBillListApiParams } from './api';
 import TypePopup from './components/TypePopup';
+import DatePopup from './components/DatePopup';
+
+interface IType {
+  id: number | string;
+  name: string;
+  type?: number;
+  user_id?: number;
+}
 
 const BillPage: FC = () => {
   const [list, setList] = useState<any[]>([]);
@@ -26,6 +34,7 @@ const BillPage: FC = () => {
   });
   const [totalPage, setTotalPage] = useState(0); // 分页总数
   const [typeVisible, setTypeVisible] = useState(false);
+  const [dateVisible, setDateVisible] = useState(false);
 
   useEffect(() => {
     console.log(2423);
@@ -59,8 +68,16 @@ const BillPage: FC = () => {
     setTotalPage(res.data.totalPage);
   };
 
-  const hanldeChooseType = item => {
-    setParams({ ...params, type_id: item.id, type_name: item.name });
+  const hanldeChooseType = (item: IType) => {
+    setParams({
+      ...params,
+      type_id: typeof item.id === 'number' ? item.id.toString() : item.id,
+      type_name: item.name,
+    });
+  };
+
+  const handleChooseDate = (date: string) => {
+    setParams({ ...params, date, page: 1 });
   };
 
   return (
@@ -81,7 +98,7 @@ const BillPage: FC = () => {
             </span>
           </div>
           <div className={styles.right}>
-            <span className={styles.time}>
+            <span className={styles.time} onClick={() => setDateVisible(true)}>
               {params.date}
               <DownOutline className={styles.arrow} />
             </span>
@@ -138,6 +155,12 @@ const BillPage: FC = () => {
             onChoose={hanldeChooseType}
           />
         )}
+        <DatePopup
+          visible={dateVisible}
+          value={params.date}
+          onClose={() => setDateVisible(false)}
+          onConfirm={handleChooseDate}
+        />
       </div>
     </div>
   );
